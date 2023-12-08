@@ -1,6 +1,8 @@
 import {connect} from "react-redux"; //Старый метод подключения
 //Новые, с помощью хуков
 
+import {incrementLikes, decrementLikes} from "./redux/actions";
+
 function Likes(props) {
     console.log(props)
     return (
@@ -13,23 +15,16 @@ function Likes(props) {
 
 function mapStateToProps(state) {
     console.log('mapState', state)
+    const { likesReducer } = state;
     return {
-        likes: state.likes
+        likes: likesReducer.likes
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return{
-        onIncrementLikes: () => {
-            console.log('click')
-            const action = { type: 'INCREMENT'};
-            dispatch(action);
-        },
-        onDecrementLikes: () => {
-            console.log('click decrement')
-            const action = { type: 'DECREMENT'};
-            dispatch(action);
-        }
+        onIncrementLikes: () => dispatch(incrementLikes()),
+        onDecrementLikes: () => dispatch(decrementLikes())
     }
 }
 
