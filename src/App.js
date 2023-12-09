@@ -7,7 +7,6 @@ import Spin from "./spin";
 
 function App() {
   const error = useSelector(state => state.appReducer.error); // Равняется либо true, либо false
-  console.log(error)
   return (
     <div className="App">
       <div className="wrap">

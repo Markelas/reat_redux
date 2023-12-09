@@ -5,7 +5,6 @@ const initialState = {
 }
 
 export const commentsReducer = (state = initialState, action) => {
-    console.log(action)
     //Получаем экшен, перезаписываем state, добавляя новые данные
     switch (action.type) {
         case COMMENT_CREATE:
@@ -15,7 +14,6 @@ export const commentsReducer = (state = initialState, action) => {
             }
         case COMMENTS_LOAD:
             //Получаем комментарии с сервера
-            console.log(action.data)
             const commentsNew = action.data.map(res => {
                 //Проходимся по массиву и возвращаем объект с полями text и id
                 return {

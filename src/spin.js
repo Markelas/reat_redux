@@ -4,7 +4,6 @@ import {useSelector} from "react-redux";
 
 const Spin = (props) => {
     const spinner = useSelector(state => state.appReducer.loading); // Равняется либо true, либо false
-    console.log(spinner)
     return (
         <div className='loader-styles'>
             {/*Спиннер из библиотеки*/}

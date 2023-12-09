@@ -5,12 +5,14 @@ import { createStore, compose, applyMiddleware } from "redux";
 //compose позволяет объединить middleware и reactDevTools
 import {rootReducer} from "./redux/rootReducer";
 import {Provider} from "react-redux"; //Свяжет реакт и редакс
+import {spamFilter} from "./redux/middleware";
 import './index.css';
 import App from './App';
 
 const store = createStore(rootReducer, compose(
         applyMiddleware(
-            thunk //Для создания асинхронных операций
+            thunk, //Для создания асинхронных операций
+            spamFilter
         ),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     ),

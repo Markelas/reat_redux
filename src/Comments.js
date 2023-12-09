@@ -19,7 +19,6 @@ function Comments(props) {
     const handleSubmit = (e) => { //Сабмитим комментарий
         e.preventDefault(); //Отключаем обновление страницы
         const id = uniqud(); //С помощью библиотеки генерируем случайный id
-        console.log(textComment, id)
         dispatch(commentCreate(textComment, id)) //Отправляем этот экшен
         setTextComment('')
     }
