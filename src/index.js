@@ -1,12 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from "redux";
+import thunk from "redux-thunk"; //Для асинхронных операций, так как redux сам по себе синхронный
+import { createStore, compose, applyMiddleware } from "redux";
+//compose позволяет объединить middleware и reactDevTools
 import {rootReducer} from "./redux/rootReducer";
 import {Provider} from "react-redux"; //Свяжет реакт и редакс
 import './index.css';
 import App from './App';
 
-const store = createStore(rootReducer) //Передаем store в provider обёртку
+const store = createStore(rootReducer, compose(
+    applyMiddleware(
+        thunk //Для создания асинхронных операций
+    ),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() //Для использования React Dev Tools
+)) //Передаем store в provider обёртку
 
 ReactDOM.render(
     <Provider store={store}><App /></Provider>,

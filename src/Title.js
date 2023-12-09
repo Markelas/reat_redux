@@ -3,7 +3,6 @@ import {inputText} from "./redux/actions";
 
 
 function Title(props){
-    console.log('props title', props)
     const text = useSelector(state => {
         const {inputReducer} = state;
         return inputReducer.text
