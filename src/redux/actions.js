@@ -1,6 +1,6 @@
 //Экшен криейтеры
 
-import  {INCREMENT, DECREMENT} from "./types";
+import  {INCREMENT, DECREMENT, INPUT_TEXT} from "./types";
 
 export function incrementLikes() { //Функции возвращают тип экшена
     return {
@@ -13,3 +13,11 @@ export function decrementLikes() {
         type: DECREMENT
     }
 }
+
+export function inputText(text) {
+    return {
+        type: INPUT_TEXT,
+        text
+    }
+}
+
