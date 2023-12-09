@@ -9,11 +9,12 @@ import './index.css';
 import App from './App';
 
 const store = createStore(rootReducer, compose(
-    applyMiddleware(
-        thunk //Для создания асинхронных операций
+        applyMiddleware(
+            thunk //Для создания асинхронных операций
+        ),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     ),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() //Для использования React Dev Tools
-)) //Передаем store в provider обёртку
+) //Для использования React Dev Tools) //Передаем store в provider обёртку
 
 ReactDOM.render(
     <Provider store={store}><App /></Provider>,

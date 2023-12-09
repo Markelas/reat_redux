@@ -1,16 +1,31 @@
-import {COMMENT_CREATE, COMMENT_DELETE, COMMENT_UPDATE} from "./types"; //Импортируем типы
+import {COMMENT_CREATE, COMMENT_DELETE, COMMENT_UPDATE, COMMENTS_LOAD} from "./types"; //Импортируем типы
 
 const initialState = {
     comments: []
 }
 
 export const commentsReducer = (state = initialState, action) => {
+    console.log(action)
     //Получаем экшен, перезаписываем state, добавляя новые данные
     switch (action.type) {
         case COMMENT_CREATE:
             return {
                 ...state,
                 comments: [...state.comments, action.data] //При обновлении массива, сначала добавляем существующие комментарии, потом добавляем комментарий из action
+            }
+        case COMMENTS_LOAD:
+            //Получаем комментарии с сервера
+            console.log(action.data)
+            const commentsNew = action.data.map(res => {
+                //Проходимся по массиву и возвращаем объект с полями text и id
+                return {
+                    text: res.name,
+                    id: res.id
+                }
+            })
+            return {
+                ...state,
+                comments: commentsNew//При обновлении массива, сначала добавляем существующие комментарии, потом добавляем комментарий из action
             }
         case COMMENT_UPDATE:
             const {data} = action; //Комментарий, который мы обновили
