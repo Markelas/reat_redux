@@ -1,7 +1,8 @@
-import {LOADER_DISPLAY_ON, LOADER_DISPLAY_OFF} from "./types"; //Импортируем типы
+import {LOADER_DISPLAY_ON, LOADER_DISPLAY_OFF, ERROR_DISPLAY_ON, ERROR_DISPLAY_OFF} from "./types"; //Импортируем типы
 
 const initialState = {
-    loading: false
+    loading: false,
+    error: null //Для отображения ошибок
 }
 
 export const appReducer = (state = initialState, action) => {
@@ -16,6 +17,17 @@ export const appReducer = (state = initialState, action) => {
                 ...state,
                 loading: false
             }
+        case ERROR_DISPLAY_ON:
+            return {
+                ...state,
+                error: action.text
+            }
+        case ERROR_DISPLAY_OFF:
+            return {
+                ...state,
+                error: null
+            }
+
         default:
             return state;
     }

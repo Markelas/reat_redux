@@ -8,7 +8,7 @@ import {
     COMMENT_UPDATE,
     COMMENT_DELETE,
     COMMENTS_LOAD,
-    LOADER_DISPLAY_ON, LOADER_DISPLAY_OFF
+    LOADER_DISPLAY_ON, LOADER_DISPLAY_OFF, ERROR_DISPLAY_ON, ERROR_DISPLAY_OFF
 } from "./types";
 
 export function incrementLikes() { //Функции возвращают тип экшена
@@ -63,9 +63,11 @@ export function commentsLoad() {
                 type: COMMENTS_LOAD,
                 data: jsonData //Комментарии в виде массива
             })
-            await dispatch(loaderOff()); //Отключаем loader
+            dispatch(loaderOff()); //Отключаем loader
         } catch (e) {
+            dispatch(errorOn('Ошибка API'));
             console.log(e)
+            dispatch(loaderOff()); //Отключаем loader
         }
     }
 }
@@ -81,3 +83,23 @@ export function loaderOff() {
         type: LOADER_DISPLAY_OFF
     }
 }
+
+export function errorOn(text) {
+    return dispatch => {
+        dispatch({ //Показываем сообщение об ошибке
+            type: ERROR_DISPLAY_ON,
+            text
+        })
+
+        setTimeout(()=> {
+            dispatch(errorOff());
+        }, 2000)
+    }
+}
+
+export function errorOff() {
+    return {
+        type: ERROR_DISPLAY_OFF
+    }
+}
+
